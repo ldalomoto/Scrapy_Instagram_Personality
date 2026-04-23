@@ -1,0 +1,195 @@
+/* POST INDIVIDUAL */
+.card_encabezado {
+    display: flex;
+    margin: 0 auto;
+    justify-content: center;
+    gap: 100px;
+    padding: 50px;
+}
+
+/* CONTENEDOR PRINCIPAL */
+.card_encabezado {
+    display: flex;
+    justify-content: space-between; /* foto + análisis separados, pero sin gaps gigantes */
+    align-items: flex-start;        /* alineamos por arriba */
+    margin: 0 auto;
+    padding: 30px;
+    max-width: 1200px;
+    gap: 40px;
+    flex-wrap: wrap; /* para que sea responsivo en pantallas pequeñas */
+}
+
+/* FOTO + INFO DEL USUARIO */
+.card_username {
+    flex: 1 1 35%; /* ocupa aprox 35% del ancho */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+/* Imagen circular del perfil */
+.card_username .image img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #ccc;
+}
+
+/* Info del usuario */
+.card_username .inf {
+    width: 100%;
+}
+
+.card_username .extra h4 {
+    margin: 5px 0;
+    font-size: 14px;
+}
+
+/* ANALISIS DE PERSONALIDAD */
+.analisis_ia {
+    flex: 1 1 55%; /* ocupa aprox 55% del ancho */
+    max-height: 450px; /* altura consistente con media posts */
+    overflow-y: auto;
+    padding: 20px;
+    border: 1px solid #eee;
+    border-radius: 10px;
+}
+
+/* Contenido interno del análisis */ 
+.analisis_ia .analisis {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.analisis_ia .analisis span {
+    display: block;
+}
+
+/* Título del análisis */
+.analisis_ia .titulo {
+    font-weight: bold;
+    font-size: 18px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.description {
+    display: flex;
+    gap: 30px;
+    justify-content: left;
+    text-align: left;
+}
+
+.post {
+    display: flex;
+    gap: 20px;
+    border-radius: 12px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    padding: 20px;
+    flex-wrap: wrap;
+}
+
+/* MEDIA DEL POST */
+.post_media {
+    flex: 1 1 40%;
+    max-height: 400px; /* altura máxima de video o imagen */
+    overflow: hidden; /* evita que se salga */
+}
+
+.post_media img,
+.post_media video {
+    width: 100%;
+    height: 100%; /* ocupa toda la altura */
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+/* INFO DEL POST */
+.post_info {
+    flex: 1 1 55%;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* DESCRIPCIÓN */
+.post_description h4 {
+    margin: 0;
+}
+
+/* COMENTARIOS CON SCROLL */
+.post_comments {
+    max-height: 400px; /* igual que .post_media */
+    overflow-y: auto;
+    padding-right: 10px; /* espacio para scrollbar */
+}
+
+.post_comments h3 {
+    margin: 0 0 10px 0;
+    font-size: 14px;
+    color: #555;
+}
+
+/* CADA COMENTARIO */
+.comment {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 5px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.section_user {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.section_user img {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.user_com {
+    font-weight: bold;
+}
+
+.user_comment {
+    margin-left: 40px;
+    font-size: 14px;
+}
+
+/* ANALISIS DE PERSONALIDAD */
+.analisis_ia {
+    flex: 1 1 40%; /* o ajusta según tu diseño */
+    max-height: 400px; /* misma altura que post_media */
+    overflow-y: auto; /* activa scroll vertical */
+    padding-right: 10px; /* espacio para scrollbar */
+    border: 1px solid #eee; /* opcional, para delimitar el área */
+    border-radius: 10px;
+}
+
+/* contenido dentro del scroll */
+.analisis_ia .analisis span {
+    display: block;
+    margin-bottom: 15px;
+}
+
+.analisis_ia .analisis {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.card_username {
+    width: 40%;
+}
+
+.analisis_ia {
+    width: 40%;
+}

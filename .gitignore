@@ -1,0 +1,17 @@
+./env
+.idea
+.env
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+*.db
+*.sqlite3
+*.log
+*.pot
+*.mo
+*.swp
+.DS_Store
+node_modules
+dist
+build
