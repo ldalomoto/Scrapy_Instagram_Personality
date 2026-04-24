@@ -111,7 +111,7 @@ async def get_comments_graphql(page, shortcode, max_comments=20):
 # =========================
 # 🚀 SCRAPER PRINCIPAL
 # =========================
-async def scrape_instagram(profile_name: str, prompt, max_posts=5):
+async def scrape_instagram(profile_name: str, prompt, max_posts=5, max_comments=10):
 
     async with async_playwright() as p:
         browser = await p.chromium.launch(headless=True)
@@ -172,6 +172,7 @@ async def scrape_instagram(profile_name: str, prompt, max_posts=5):
                     posts.append({
                         "id": post_id,
                         "shortcode": node.get("code"),
+                        "media_type": node.get("media_type"),
                         "caption": (
                             node.get("caption", {}).get("text", "")
                             if isinstance(node.get("caption"), dict)
@@ -188,15 +189,14 @@ async def scrape_instagram(profile_name: str, prompt, max_posts=5):
         page.on("response", handle_response)
 
         # =========================
-        # 🔐 LOGIN
+        # LOGIN
         # =========================
         if not os.path.exists(STATE_FILE):
             await page.goto("https://www.instagram.com/accounts/login/")
-            print("👉 Login manual (60s)...")
+            print("Login manual (60s)...")
             await page.wait_for_timeout(60000)
             await context.storage_state(path=STATE_FILE)
 
-            # 👇 AÑADE ESTO
         
 
         # =========================
@@ -232,8 +232,8 @@ async def scrape_instagram(profile_name: str, prompt, max_posts=5):
             for p in posts if p.get("shortcode")
         ]
 
-        print("\nLINKS:")
-        print(links)
+        #print("\nLINKS:")
+        #print(links)
 
         # =========================
         # 💬 COMENTARIOS
@@ -243,7 +243,7 @@ async def scrape_instagram(profile_name: str, prompt, max_posts=5):
             media_id = post["id"]
 
             print(f"\n🔎 Post {i+1}")
-            comments = await get_comments_graphql(page, post["shortcode"], max_comments=5)
+            comments = await get_comments_graphql(page, post["shortcode"], max_comments=max_comments)
             post["comments"] = comments
             print(f"   💬 {len(comments)} comentarios")
 
@@ -286,7 +286,7 @@ async def scrape_instagram(profile_name: str, prompt, max_posts=5):
 # =========================
 # 🚀 MAIN
 # =========================
-async def main(username: str):
+async def main(username: str, num_posts: int, num_comments: int):
     user = username
 
     prompt = '''
@@ -342,7 +342,7 @@ CRITERIOS:
 DATOS DEL USUARIO:
     '''
 
-    data = await scrape_instagram(user, prompt, max_posts=2)
+    data = await scrape_instagram(user, prompt, max_posts=num_posts, max_comments=num_comments)
 
     
 

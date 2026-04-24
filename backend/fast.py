@@ -22,10 +22,10 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-@app.get("/send-username/{username}")
-async def receive_username(username: str):
+@app.get("/send-username/{username}&&{numPosts}&&{numComments}")
+async def receive_username(username: str, numPosts: int, numComments: int):
 
-    result = await version3_funcional.main(username)
+    result = await version3_funcional.main(username, numPosts, numComments)
     return result
     
 
