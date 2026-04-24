@@ -3,8 +3,8 @@ import { useState } from "react";
 import { data, useParams } from "react-router";
 import './informacion.css'
 
-function Scrapy_Python({ username, setData }) {
-    fetch(`http://127.0.0.1:8000/send-username/${username}`)
+function Scrapy_Python({ username, numPosts, numComments, setData }) {
+    fetch(`http://127.0.0.1:8000/send-username/${username}&&${numPosts}&&${numComments}`)
         .then((response) => response.json())
         .then((data) => {
             console.log(data),
@@ -40,45 +40,45 @@ function Card_Username({ user }) {
                     <div className="titulo">ANALISIS DE PERSONALIDAD</div>
                     <div className="analisis">
                         <span className="agreeableness">
-                            <h3>agreeableness</h3>
+                            <h3>Perfil de personalidad</h3>
                             <div className="description">
-                                <h5>Score: {user[2].agreeableness.score}</h5>
-                                <h4>Justification: {user[2].agreeableness.justification}</h4>
+                                <h5>Score: {user[2].confidence}</h5>
+                                <h4>Justification: {user[2].summary}</h4>
                             </div>
                         </span>
                         <span className="conscientiousness">
-                            <h3>conscientiousness</h3>
+                            <h3>Responsabilidad</h3>
                             <div className="description">
                                 <h5>Score: {user[2].conscientiousness.score}</h5>
                                 <h4>Justification: {user[2].conscientiousness.justification}</h4>
                             </div>
                         </span>
                         <span className="extraversion">
-                            <h3>extraversion</h3>
+                            <h3>Extroversión</h3>
                             <div className="description">
                                 <h5>Score: {user[2].extraversion.score}</h5>
                                 <h4>Justification: {user[2].extraversion.justification}</h4>
                             </div>
                         </span>
                         <span className="neuroticism">
-                            <h3>neuroticism</h3>
+                            <h3>Neuroticismo</h3>
                             <div className="description">
                                 <h5>Score: {user[2].neuroticism.score}</h5>
                                 <h4>Justification: {user[2].neuroticism.justification}</h4>
                             </div>
                         </span>
                         <span className="openness">
-                            <h3>openness</h3>
+                            <h3>Apertura a la experiencia</h3>
                             <div className="description">
                                 <h5>Score: {user[2].openness.score}</h5>
                                 <h4>Justification: {user[2].openness.justification}</h4>
                             </div>
                         </span>
                         <span className="summary">
-                            <h3>summary</h3>
+                            <h3>Amabilidad</h3>
                             <div className="description">
-                                <h5>Score: {user[2].confidence}</h5>
-                                <h4>Justification: {user[2].summary}</h4>
+                                <h5>Score: {user[2].agreeableness.score}</h5>
+                                <h4>Justification: {user[2].agreeableness.justification}</h4>
                             </div>
                         </span>
                     </div>
@@ -89,19 +89,50 @@ function Card_Username({ user }) {
 }
 
 function Card_Post({ user }) {
-    console.log(user.media[0].url)
+    const [index, setIndex] = useState(0);
+
+    const media = user.media;
+    const current = media[index];
+
+    const next = () => {
+        if (index < media.length - 1) {
+            setIndex(index + 1);
+        }
+    };
+
+    const prev = () => {
+        if (index > 0) {
+            setIndex(index - 1);
+        }
+    };
+
     return (
         <>
             <div className="post">
                 <div className="post_media">
-                    <video
-                        src={`http://127.0.0.1:8000/media-proxy?url=${encodeURIComponent(user.media[0].url)}`}
-                        controls
-                    />
+                    {current.type === "image" ? (
+                        <img
+                            src={`http://127.0.0.1:8000/media-proxy?url=${encodeURIComponent(current.url)}`}
+                            alt="media"
+                        />
+                    ) : (
+                        <video
+                            src={`http://127.0.0.1:8000/media-proxy?url=${encodeURIComponent(current.url)}`}
+                            controls
+                        />
+                    )}
+
+                    {media.length > 1 && (
+                        <>
+                            <button className="prev" onClick={prev}>◀</button>
+                            <button className="next" onClick={next}>▶</button>
+                        </>
+                    )}
                 </div>
                 <div className="post_info">
                     <div className="post_description">
                         <h4>{user.caption}</h4>
+                        <h6>likes {user.likes}  -   comments {user.comments.length}</h6>
                     </div>
                     <div className="post_comments">
                         <h3>COMMENTS</h3>
@@ -124,11 +155,11 @@ function Card_Post({ user }) {
 export default function Infor() {
     const [data, setData] = useState([]);
 
-    const { username } = useParams();
+    const { username, numPosts, numComments } = useParams();
 
     useEffect(() => {
-        Scrapy_Python({ username, setData })
-    }, [username]);
+        Scrapy_Python({ username, numPosts, numComments, setData })
+    }, [username, numPosts, numComments]);
 
     return (
         <>

@@ -92,19 +92,56 @@
     flex-wrap: wrap;
 }
 
-/* MEDIA DEL POST */
+/* MEDIA DEL POST (CONTENEDOR DEL CARRUSEL) */
 .post_media {
+    position: relative; /* CLAVE para posicionar botones */
     flex: 1 1 40%;
-    max-height: 400px; /* altura máxima de video o imagen */
-    overflow: hidden; /* evita que se salga */
+    max-height: 400px;
+    overflow: hidden;
+    border-radius: 10px;
 }
 
+/* MEDIA */
 .post_media img,
 .post_media video {
     width: 100%;
-    height: 100%; /* ocupa toda la altura */
-    border-radius: 10px;
+    height: 100%;
     object-fit: cover;
+    display: block;
+    border-radius: 10px;
+}
+
+/* BOTONES DEL CARRUSEL */
+.post_media button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.6);
+    color: white;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 10; /* 🔥 IMPORTANTE */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* IZQUIERDA */
+.post_media .prev {
+    left: 10px;
+}
+
+/* DERECHA */
+.post_media .next {
+    right: 10px;
+}
+
+/* HOVER */
+.post_media button:hover {
+    background: rgba(0, 0, 0, 0.8);
 }
 
 /* INFO DEL POST */
@@ -192,4 +229,9 @@
 
 .analisis_ia {
     width: 40%;
+}
+
+.prev {
+    border: 2px solid white;
+    margin: auto;
 }

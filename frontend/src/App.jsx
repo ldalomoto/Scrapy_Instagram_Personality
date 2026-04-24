@@ -6,13 +6,15 @@ import Infor from './components/information';
 
 function App() {
   const [username, setUsername] = useState("")
+  const [numPosts, setNumPosts] = useState(5)
+  const [numComments, setNumComments] = useState(5)
 
   return (
     <>
       <Router>
         <Routes>
-          <Route path="/" element={<Home username={username} setUsername={setUsername}/>} />
-          <Route path="/infor/:username" element={<Infor />} />
+          <Route path="/" element={<Home username={username} setUsername={setUsername} numPosts2={numPosts} setNumePosts={setNumPosts} numComments2={numComments} setNumeComments={setNumComments}/>} />
+          <Route path="/infor/:username/:numPosts/:numComments" element={<Infor />} />
         </Routes>
       </Router>
     </>
