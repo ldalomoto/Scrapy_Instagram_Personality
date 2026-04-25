@@ -31,10 +31,11 @@ SCRAPY-INSTAGRAM/
 ```
 
 🛠️ Requisitos Previos
-Python 3.10+
-Node.js & npm
-Google Gemini API Key (configurada en un archivo .env dentro de backend/)
+- Python 3.10+
+- Node.js & npm
+- Google Gemini API Key (configurada en un archivo .env dentro de backend/)
 🚀 Instalación y Configuración
+
 1. Backend (Python)
 
 Entra en la carpeta del backend, activa tu entorno virtual e instala las dependencias:
@@ -45,29 +46,68 @@ pip install fastapi uvicorn playwright pydantic google-generativeai python-doten
 
 # Instala los navegadores de Playwright
 playwright install chromium
-Configuración de variables de entorno
+
+# Configuración de variables de entorno
 
 Crea un archivo .env dentro de backend/:
 
 GEMINI_API_KEY=tu_api_key_aqui
-Ejecución
+
+# Ejecución
+
 uvicorn fast:app --reload
+
 2. Frontend (React)
 
 Entra en la carpeta del frontend e instala las dependencias:
 
-cd frontend
-npm install
+- cd frontend
+- npm install
+
 Ejecución
+
 npm run dev
-🖥️ Guía de Uso
+
+# 🖥️ Guía de Uso
+
 Inicio: Al abrir la aplicación en http://localhost:5173, verás un formulario.
+
 Entrada: Introduce el username del perfil de Instagram, el número de posts a analizar y el número de comentarios por post.
+
 Proceso: El backend iniciará una instancia de Playwright, extraerá el contenido y lo enviará a Gemini.
+
 Resultados: Se mostrará un dashboard con la información del usuario, sus publicaciones y el análisis detallado de los rasgos de personalidad:
-Apertura
-Responsabilidad
-Extraversión
-Amabilidad
-Neuroticismo
+
+- Apertura
+- Responsabilidad
+- Extraversión
+- Amabilidad
+- Neuroticismo
+
+## 🖼️ Vista de la Aplicación
+
+### 🔹 Pantalla principal
+![Home](assets/images/home.png)
+
+### 🔹 Dashboard de resultados
+![Dashboard](assets/images/analisis.png)
+
+### 🔹 Análisis de personalidad
+![Responsabilidad](assets/images/responsabilidad.png)
+
+![Amabilidad](assets/images/amabilidad.png)
+
+![Apertura](assets/images/apertura.png)
+
+![Extroversion](assets/images/extroversion.png)
+
+![Neuroticismo](assets/images/neuroticismo.png)
+
+### 🔹 Posts
+
+![Post](assets/images/posts.png)
+
+![Posts2](assets/images/posts2.png)
+
+![Posts3](assets/images/posts3.png)
 
